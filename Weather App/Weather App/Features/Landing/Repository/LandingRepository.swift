@@ -23,7 +23,7 @@ class LandingRepository: LandingRepositoryType {
         self.lat = "35"
         self.lon = "139"
         self.apikey = "ced76cc94a19715f73c16d224dbfc9d1"
-        self.url = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apikey)"
+        self.url = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apikey)&units=metric"
     }
 
     func fetchWeatherResults(completionHandler: @escaping WeatherResponse) {
@@ -50,7 +50,6 @@ class LandingRepository: LandingRepositoryType {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    print(error)
                     completionHandler(Result.failure(.parsingError))
                 }
             }

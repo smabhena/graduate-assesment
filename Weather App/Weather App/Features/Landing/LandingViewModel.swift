@@ -9,6 +9,7 @@ import Foundation
 
 protocol LandingViewModelDelegate: AnyObject {
     func show(error: String)
+    func loadContent()
 }
 
 class LandingViewModel {
@@ -21,11 +22,16 @@ class LandingViewModel {
         self.delegate = delegate
     }
     
+    var weather: Response? {
+        return self.weatherReponse
+    }
+    
     func fetchWeather() {
         self.repository?.fetchWeatherResults(completionHandler: { [weak self] result in
             switch result {
             case .success(let response):
                 self?.weatherReponse = response
+                self?.delegate?.loadContent()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }
