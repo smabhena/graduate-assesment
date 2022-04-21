@@ -10,7 +10,7 @@ import Foundation
 typealias WeatherResponse = (Result<Response, APIError>) -> Void
 
 protocol LandingRepositoryType: AnyObject {
-    func fetchWeatherResults(method: Method, completionHandler: @escaping WeatherResponse)
+    func fetchWeatherResults(completionHandler: @escaping WeatherResponse)
 }
 
 class LandingRepository: LandingRepositoryType {
@@ -26,7 +26,7 @@ class LandingRepository: LandingRepositoryType {
         self.url = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apikey)"
     }
 
-    func fetchWeatherResults(method: Method, completionHandler: @escaping WeatherResponse) {
+    func fetchWeatherResults(completionHandler: @escaping WeatherResponse) {
         guard let request = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: request) { data, _, error in

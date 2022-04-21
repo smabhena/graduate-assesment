@@ -12,8 +12,3 @@ enum APIError: String, Error {
     case serverError
     case parsingError
 }
-
-enum Method {
-    case GET
-    case POST
-}

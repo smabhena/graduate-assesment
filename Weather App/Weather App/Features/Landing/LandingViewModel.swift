@@ -22,7 +22,7 @@ class LandingViewModel {
     }
     
     func fetchWeather() {
-        self.repository?.fetchWeatherResults(method: .GET, completionHandler: { [weak self] result in
+        self.repository?.fetchWeatherResults(completionHandler: { [weak self] result in
             switch result {
             case .success(let response):
                 self?.weatherReponse = response
