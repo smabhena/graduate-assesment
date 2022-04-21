@@ -17,7 +17,7 @@
 		28B4A04628112AF0000FCF4C /* Weather_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A04528112AF0000FCF4C /* Weather_AppUITestsLaunchTests.swift */; };
 		28B4A05628112B9F000FCF4C /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A05528112B9F000FCF4C /* LandingViewController.swift */; };
 		28B4A05828112BB6000FCF4C /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A05728112BB6000FCF4C /* LandingViewModel.swift */; };
-		28B4A0612811324D000FCF4C /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A0602811324D000FCF4C /* ResponseModel.swift */; };
+		28B4A0612811324D000FCF4C /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A0602811324D000FCF4C /* CurrentWeatherModel.swift */; };
 		28B4A063281133EB000FCF4C /* LandingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A062281133EB000FCF4C /* LandingRepository.swift */; };
 		28B4A06728113623000FCF4C /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A06628113623000FCF4C /* ServiceErrors.swift */; };
 		28B4A07128114C27000FCF4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B4A07028114C27000FCF4C /* Main.storyboard */; };
@@ -55,7 +55,7 @@
 		28B4A04528112AF0000FCF4C /* Weather_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		28B4A05528112B9F000FCF4C /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		28B4A05728112BB6000FCF4C /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
-		28B4A0602811324D000FCF4C /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		28B4A0602811324D000FCF4C /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
 		28B4A062281133EB000FCF4C /* LandingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingRepository.swift; sourceTree = "<group>"; };
 		28B4A06628113623000FCF4C /* ServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceErrors.swift; sourceTree = "<group>"; };
 		28B4A07028114C27000FCF4C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		28B4A05328112B68000FCF4C /* Landing */ = {
 			isa = PBXGroup;
 			children = (
-				28B4A05F28112DDE000FCF4C /* Model */,
+				28B4A05F28112DDE000FCF4C /* Models */,
 				28B4A05428112B8A000FCF4C /* Repository */,
 				28B4A05528112B9F000FCF4C /* LandingViewController.swift */,
 				28B4A05728112BB6000FCF4C /* LandingViewModel.swift */,
@@ -183,12 +183,12 @@
 			path = "Style Kit";
 			sourceTree = "<group>";
 		};
-		28B4A05F28112DDE000FCF4C /* Model */ = {
+		28B4A05F28112DDE000FCF4C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				28B4A0602811324D000FCF4C /* ResponseModel.swift */,
+				28B4A0602811324D000FCF4C /* CurrentWeatherModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		28B4A0642811341E000FCF4C /* Extensions */ = {
@@ -350,7 +350,7 @@
 				28B4A05628112B9F000FCF4C /* LandingViewController.swift in Sources */,
 				28B4A05828112BB6000FCF4C /* LandingViewModel.swift in Sources */,
 				28B4A06728113623000FCF4C /* ServiceErrors.swift in Sources */,
-				28B4A0612811324D000FCF4C /* ResponseModel.swift in Sources */,
+				28B4A0612811324D000FCF4C /* CurrentWeatherModel.swift in Sources */,
 				28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */,
 				28B4A063281133EB000FCF4C /* LandingRepository.swift in Sources */,
 			);
