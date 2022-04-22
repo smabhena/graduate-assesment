@@ -6,17 +6,33 @@
 //
 
 import UIKit
+import CoreLocation
 
-class LandingViewController: UIViewController {
+class LandingViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet private var tempreture: UILabel!
     @IBOutlet private var weather: UILabel!
+    
+    var manager: CLLocationManager = CLLocationManager()
 
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
                                                   delegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchWeather()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        viewModel.fetchWeather(String(Int(location.coordinate.latitude)),
+                               String(Int(location.coordinate.longitude)))
     }
 }
 
