@@ -50,4 +50,6 @@ extension LandingViewController: LandingViewModelDelegate {
         self.tempreture.text = "\(String(roundedDegree))°C"
         self.weather.text = weather[0].main
     }
+    
+//    random comment
 }
