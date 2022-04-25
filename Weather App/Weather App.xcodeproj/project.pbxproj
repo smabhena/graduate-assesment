@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		2840D0A72812DC5100FC6695 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		2840D0AA2816841B00FC6695 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
-		2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = "Weather App/Features/Landing/Custom Cells/UIViewControllerExtension.swift"; sourceTree = SOURCE_ROOT; };
+		2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = "Weather App/Extensions/UIViewControllerExtension.swift"; sourceTree = SOURCE_ROOT; };
 		2840D0AF2816B14200FC6695 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		28B4A01C28112AEE000FCF4C /* Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B4A01F28112AEE000FCF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +110,14 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		2840D0B12816B84800FC6695 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		28B4A01328112AEE000FCF4C = {
 			isa = PBXGroup;
 			children = (
@@ -133,10 +141,10 @@
 		28B4A01E28112AEE000FCF4C /* Weather App */ = {
 			isa = PBXGroup;
 			children = (
+				2840D0B12816B84800FC6695 /* Extensions */,
 				2840D0AE2816B13100FC6695 /* Enums */,
 				28B4A06F28114C16000FCF4C /* User Interface */,
 				28B4A06528113609000FCF4C /* Service Layer */,
-				28B4A0642811341E000FCF4C /* Extensions */,
 				28B4A05C28112D2F000FCF4C /* Style Kit */,
 				28B4A05B28112D0A000FCF4C /* Launch */,
 				28B4A05228112B5F000FCF4C /* Features */,
@@ -216,14 +224,6 @@
 				2840D0A72812DC5100FC6695 /* ForecastModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		28B4A0642811341E000FCF4C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		28B4A06528113609000FCF4C /* Service Layer */ = {
