@@ -10,7 +10,7 @@ import Foundation
 protocol LandingViewModelDelegate: AnyObject {
     func show(error: String)
     func loadContent()
-    func loadForecast()
+    func reloadView()
 }
 
 class LandingViewModel {
@@ -26,6 +26,18 @@ class LandingViewModel {
     
     var weather: Response? {
         return self.weatherReponse
+    }
+    
+    var forecast: Forecast? {
+        return self.forecastResponse
+    }
+    
+    var forecastList: [List]? {
+        return self.forecastResponse?.list
+    }
+    
+    var forecastCount: Int {
+        return self.forecastResponse?.cnt ?? 0
     }
     
     func fetchWeather(_ latitude: String,_ longitude: String) {
@@ -45,7 +57,7 @@ class LandingViewModel {
             switch result {
             case .success(let response):
                 self?.forecastResponse = response
-                self?.delegate?.loadForecast()
+                self?.delegate?.reloadView()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }

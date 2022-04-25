@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HAM-A4-LTg">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -35,7 +35,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="4yb-a7-hVR" firstAttribute="centerX" secondItem="2jW-AD-fTx" secondAttribute="centerX" id="NGw-fK-mrp"/>
                                             <constraint firstItem="VOB-UC-UJI" firstAttribute="top" secondItem="2jW-AD-fTx" secondAttribute="top" constant="135" id="UtH-ie-eFY"/>
@@ -45,14 +45,52 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h08-qg-3Yn" userLabel="Forecast View">
                                         <rect key="frame" x="0.0" y="384.5" width="414" height="384.5"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x3h-Rc-YFj">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="384.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewcell" id="EGE-ek-dpA" customClass="ForecastTableViewCell" customModule="Weather_App" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EGE-ek-dpA" id="6VQ-zp-6Fi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMY-0k-flN">
+                                                                    <rect key="frame" x="349" y="11" width="45" height="22"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="kMY-0k-flN" firstAttribute="top" secondItem="6VQ-zp-6Fi" secondAttribute="topMargin" id="A3J-gR-wkQ"/>
+                                                                <constraint firstItem="kMY-0k-flN" firstAttribute="trailing" secondItem="6VQ-zp-6Fi" secondAttribute="trailingMargin" id="gjU-iB-8jc"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="kMY-0k-flN" secondAttribute="bottom" id="kRi-RK-62O"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="forecastTemp" destination="kMY-0k-flN" id="lXB-KL-TeD"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="x3h-Rc-YFj" secondAttribute="bottom" id="34G-sg-nUq"/>
+                                            <constraint firstAttribute="trailing" secondItem="x3h-Rc-YFj" secondAttribute="trailing" id="6jR-ih-jWq"/>
+                                            <constraint firstItem="x3h-Rc-YFj" firstAttribute="leading" secondItem="h08-qg-3Yn" secondAttribute="leading" id="H4W-L4-TxC"/>
+                                            <constraint firstItem="x3h-Rc-YFj" firstAttribute="top" secondItem="h08-qg-3Yn" secondAttribute="top" id="wuL-sv-Eqb"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <variation key="heightClass=compact-widthClass=regular" axis="horizontal"/>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yEd-DE-SwX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ej3-CG-p55"/>
                             <constraint firstItem="yEd-DE-SwX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="F8G-3N-qxc"/>
@@ -64,6 +102,7 @@
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="forecastTableView" destination="x3h-Rc-YFj" id="lcC-Ha-Z8v"/>
                         <outlet property="tempreture" destination="VOB-UC-UJI" id="DlO-Vh-QZ4"/>
                         <outlet property="weather" destination="4yb-a7-hVR" id="m0B-vZ-MXr"/>
                     </connections>
@@ -92,12 +131,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="house" catalog="system" width="32" height="32"/>
+        <image name="house" catalog="system" width="128" height="106"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

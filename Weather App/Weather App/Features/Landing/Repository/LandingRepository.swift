@@ -82,7 +82,6 @@ class LandingRepository: LandingRepositoryType {
                     completionHandler(Result.success(object))
                 }
             } catch {
-                print(error)
                 DispatchQueue.main.async {
                     completionHandler(Result.failure(.parsingError))
                 }
