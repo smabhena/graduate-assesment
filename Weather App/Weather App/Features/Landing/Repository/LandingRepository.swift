@@ -12,6 +12,7 @@ typealias ForecastResponse = (Result<Forecast, APIError>) -> Void
 
 protocol LandingRepositoryType: AnyObject {
     func fetchWeatherResults(_ latitude: String,_ longitude: String, completionHandler: @escaping WeatherResponse)
+    func fetchForecastResults(_ latitude: String,_ longitude: String, completionHandler: @escaping ForecastResponse)
 }
 
 class LandingRepository: LandingRepositoryType {
@@ -57,7 +58,7 @@ class LandingRepository: LandingRepositoryType {
     
     func fetchForecastResults(_ latitude: String,_ longitude: String, completionHandler: @escaping ForecastResponse) {
         let url =
-            "api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(self.apikey)"
+            "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(self.apikey)&cnt=5&units=metric"
         
         guard let request = URL(string: url) else { return }
         
@@ -81,6 +82,7 @@ class LandingRepository: LandingRepositoryType {
                     completionHandler(Result.success(object))
                 }
             } catch {
+                print(error)
                 DispatchQueue.main.async {
                     completionHandler(Result.failure(.parsingError))
                 }

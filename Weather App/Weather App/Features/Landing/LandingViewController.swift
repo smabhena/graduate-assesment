@@ -34,8 +34,12 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
-        viewModel.fetchWeather(String(Int(location.coordinate.latitude)),
-                               String(Int(location.coordinate.longitude)))
+        
+        let latitude = String(location.coordinate.latitude)
+        let longtitude = String(location.coordinate.longitude)
+        
+        viewModel.fetchWeather(latitude, longtitude)
+        viewModel.fetchForecast(latitude, longtitude)
     }
 }
 
@@ -52,5 +56,9 @@ extension LandingViewController: LandingViewModelDelegate {
         let roundedDegree = Int(degree.rounded(.toNearestOrEven))
         self.tempreture.text = "\(String(roundedDegree))°C"
         self.weather.text = weather[0].main
+    }
+    
+    func loadForecast() {
+        
     }
 }

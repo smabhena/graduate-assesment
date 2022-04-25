@@ -10,12 +10,14 @@ import Foundation
 protocol LandingViewModelDelegate: AnyObject {
     func show(error: String)
     func loadContent()
+    func loadForecast()
 }
 
 class LandingViewModel {
     private var repository: LandingRepositoryType?
     private var delegate: LandingViewModelDelegate?
     private var weatherReponse: Response?
+    private var forecastResponse: Forecast?
     
     init(repository: LandingRepository, delegate: LandingViewModelDelegate){
         self.repository = repository
@@ -38,7 +40,15 @@ class LandingViewModel {
         })
     }
     
-//    func fetchForecast() {
-//        self.repository?.fe
-//    }
+    func fetchForecast(_ latitude: String,_ longitude: String) {
+        self.repository?.fetchForecastResults(latitude, longitude, completionHandler: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.forecastResponse = response
+                self?.delegate?.loadForecast()
+            case .failure(let error):
+                self?.delegate?.show(error: error.rawValue)
+            }
+        })
+    }
 }
