@@ -9,10 +9,10 @@ import UIKit
 import CoreLocation
 
 class LandingViewController: UIViewController, CLLocationManagerDelegate {
+    @IBOutlet private var city: UILabel!
     @IBOutlet private var tempreture: UILabel!
     @IBOutlet private var weather: UILabel!
     @IBOutlet private weak var forecastTableView: UITableView!
-    @IBOutlet private weak var temp: UILabel!
     
     private var manager: CLLocationManager = CLLocationManager()
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
@@ -31,6 +31,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     func setUpTableView() {
         forecastTableView.delegate = self
         forecastTableView.dataSource = self
+        forecastTableView.rowHeight = 50
     }
     
     func setUpManager() {
@@ -65,7 +66,7 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0)
+        cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0, viewModel.currentWeekFromToday[indexPath.row])
         
         return cell
     }
@@ -84,6 +85,7 @@ extension LandingViewController: LandingViewModelDelegate {
         let roundedDegree = Int(degree.rounded(.toNearestOrEven))
         self.tempreture.text = "\(String(roundedDegree))°C"
         self.weather.text = weather[0].main
+        self.city.text = viewModel.city
     }
     
     func reloadView() {

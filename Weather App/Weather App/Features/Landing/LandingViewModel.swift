@@ -24,6 +24,10 @@ class LandingViewModel {
         self.delegate = delegate
     }
     
+    var city: String? {
+        return self.weatherReponse?.name
+    }
+    
     var weather: Response? {
         return self.weatherReponse
     }
@@ -38,6 +42,36 @@ class LandingViewModel {
     
     var forecastCount: Int {
         return self.forecastResponse?.cnt ?? 0
+    }
+    
+    var daysOfWeek: [String] {
+        return Calendar.current.shortWeekdaySymbols
+    }
+    
+    var today: String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E"
+        return dateFormatter.string(from: date)
+    }
+    
+    var currentWeekFromToday: [String] {
+        guard var dayIndex = daysOfWeek.firstIndex(of: self.today) else { return [] }
+        
+        var currentWeek: [String] = []
+        let limit = 5
+        var i = 0
+        
+        while i < limit {
+            currentWeek.append(daysOfWeek[dayIndex])
+            dayIndex = dayIndex.advanced(by: 1)
+            if dayIndex > 6 {
+                dayIndex = 0
+            }
+            i = i + 1
+        }
+        
+        return currentWeek
     }
     
     func fetchWeather(_ latitude: String,_ longitude: String) {

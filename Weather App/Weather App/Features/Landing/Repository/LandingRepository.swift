@@ -26,7 +26,7 @@ class LandingRepository: LandingRepositoryType {
     func fetchWeatherResults(_ latitude: String,_ longitude: String, completionHandler: @escaping WeatherResponse) {
         
         let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apikey)&units=metric"
-                
+ 
         guard let request = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: request) { data, _, error in

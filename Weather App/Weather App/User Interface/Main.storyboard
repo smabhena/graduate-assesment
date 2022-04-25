@@ -34,9 +34,17 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCw-9y-EhB">
+                                                <rect key="frame" x="207" y="79" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="4yb-a7-hVR" firstAttribute="top" secondItem="dCw-9y-EhB" secondAttribute="bottom" constant="64" id="6oB-MV-HzZ"/>
+                                            <constraint firstItem="dCw-9y-EhB" firstAttribute="centerX" secondItem="2jW-AD-fTx" secondAttribute="centerX" id="H4q-r0-hO5"/>
                                             <constraint firstItem="4yb-a7-hVR" firstAttribute="centerX" secondItem="2jW-AD-fTx" secondAttribute="centerX" id="NGw-fK-mrp"/>
                                             <constraint firstItem="VOB-UC-UJI" firstAttribute="top" secondItem="2jW-AD-fTx" secondAttribute="top" constant="135" id="UtH-ie-eFY"/>
                                             <constraint firstItem="VOB-UC-UJI" firstAttribute="centerX" secondItem="2jW-AD-fTx" secondAttribute="centerX" id="hwp-f7-6SN"/>
@@ -63,14 +71,24 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzM-W3-dqP">
+                                                                    <rect key="frame" x="20" y="0.0" width="45" height="44"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="kMY-0k-flN" firstAttribute="top" secondItem="6VQ-zp-6Fi" secondAttribute="topMargin" id="A3J-gR-wkQ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="CzM-W3-dqP" secondAttribute="bottom" id="FR1-EV-JRl"/>
+                                                                <constraint firstItem="CzM-W3-dqP" firstAttribute="top" secondItem="6VQ-zp-6Fi" secondAttribute="top" id="YDH-LK-xKY"/>
                                                                 <constraint firstItem="kMY-0k-flN" firstAttribute="trailing" secondItem="6VQ-zp-6Fi" secondAttribute="trailingMargin" id="gjU-iB-8jc"/>
+                                                                <constraint firstItem="CzM-W3-dqP" firstAttribute="leading" secondItem="6VQ-zp-6Fi" secondAttribute="leadingMargin" id="h20-UT-IYJ"/>
                                                                 <constraint firstAttribute="bottomMargin" secondItem="kMY-0k-flN" secondAttribute="bottom" id="kRi-RK-62O"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
+                                                            <outlet property="day" destination="CzM-W3-dqP" id="coA-sV-a4J"/>
                                                             <outlet property="forecastTemp" destination="kMY-0k-flN" id="lXB-KL-TeD"/>
                                                         </connections>
                                                     </tableViewCell>
@@ -102,6 +120,7 @@
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="city" destination="dCw-9y-EhB" id="A78-2Y-p7v"/>
                         <outlet property="forecastTableView" destination="x3h-Rc-YFj" id="lcC-Ha-Z8v"/>
                         <outlet property="tempreture" destination="VOB-UC-UJI" id="DlO-Vh-QZ4"/>
                         <outlet property="weather" destination="4yb-a7-hVR" id="m0B-vZ-MXr"/>
