@@ -12,8 +12,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet private var tempreture: UILabel!
     @IBOutlet private var weather: UILabel!
     
-    var manager: CLLocationManager = CLLocationManager()
-
+    private var manager: CLLocationManager = CLLocationManager()
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
                                                   delegate: self)
 
@@ -23,6 +22,10 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setUpManager()
+    }
+    
+    func setUpManager() {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()

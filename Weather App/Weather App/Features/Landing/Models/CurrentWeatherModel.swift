@@ -53,6 +53,7 @@ struct Sys: Codable {
     let message: Double?
     let country: String?
     let sunrise, sunset: Int?
+    let pod: String?
 }
 
 // MARK: - Weather
@@ -71,5 +72,5 @@ struct Weather: Codable {
 struct Wind: Codable {
     let speed: Double?
     let deg: Int?
+    let gust: Double?
 }
-

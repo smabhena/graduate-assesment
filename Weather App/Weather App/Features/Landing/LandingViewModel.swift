@@ -37,4 +37,8 @@ class LandingViewModel {
             }
         })
     }
+    
+//    func fetchForecast() {
+//        self.repository?.fe
+//    }
 }

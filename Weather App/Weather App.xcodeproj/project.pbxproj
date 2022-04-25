@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2840D0A82812DC5200FC6695 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0A72812DC5100FC6695 /* ForecastModel.swift */; };
 		28B4A02028112AEE000FCF4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A01F28112AEE000FCF4C /* AppDelegate.swift */; };
 		28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02128112AEE000FCF4C /* SceneDelegate.swift */; };
 		28B4A02A28112AEE000FCF4C /* Weather_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02828112AEE000FCF4C /* Weather_App.xcdatamodeld */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2840D0A72812DC5100FC6695 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		28B4A01C28112AEE000FCF4C /* Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B4A01F28112AEE000FCF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B4A02128112AEE000FCF4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				28B4A0602811324D000FCF4C /* CurrentWeatherModel.swift */,
+				2840D0A72812DC5100FC6695 /* ForecastModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				28B4A02028112AEE000FCF4C /* AppDelegate.swift in Sources */,
 				28B4A05628112B9F000FCF4C /* LandingViewController.swift in Sources */,
 				28B4A05828112BB6000FCF4C /* LandingViewModel.swift in Sources */,
+				2840D0A82812DC5200FC6695 /* ForecastModel.swift in Sources */,
 				28B4A06728113623000FCF4C /* ServiceErrors.swift in Sources */,
 				28B4A0612811324D000FCF4C /* CurrentWeatherModel.swift in Sources */,
 				28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */,
