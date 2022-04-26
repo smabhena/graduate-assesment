@@ -11,6 +11,12 @@
 		2840D0AB2816841B00FC6695 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0AA2816841B00FC6695 /* ForecastTableViewCell.swift */; };
 		2840D0AD28169DCB00FC6695 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */; };
 		2840D0B02816B14200FC6695 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0AF2816B14200FC6695 /* WeatherCondition.swift */; };
+		2840D0B42816FF1400FC6695 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B32816FF1400FC6695 /* SearchViewController.swift */; };
+		2840D0B62816FF1F00FC6695 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */; };
+		2840D0B92816FF3D00FC6695 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B82816FF3D00FC6695 /* SearchRepository.swift */; };
+		2840D0BB2817071E00FC6695 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0BA2817071E00FC6695 /* ResultsViewController.swift */; };
+		2840D0BE2817D22A00FC6695 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0BD2817D22A00FC6695 /* SearchModel.swift */; };
+		2840D0C12817DDA300FC6695 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0C02817DDA300FC6695 /* SearchTableViewCell.swift */; };
 		28B4A02028112AEE000FCF4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A01F28112AEE000FCF4C /* AppDelegate.swift */; };
 		28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02128112AEE000FCF4C /* SceneDelegate.swift */; };
 		28B4A02A28112AEE000FCF4C /* Weather_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02828112AEE000FCF4C /* Weather_App.xcdatamodeld */; };
@@ -49,6 +55,12 @@
 		2840D0AA2816841B00FC6695 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		2840D0AC28169DCB00FC6695 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = "Weather App/Extensions/UIViewControllerExtension.swift"; sourceTree = SOURCE_ROOT; };
 		2840D0AF2816B14200FC6695 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		2840D0B32816FF1400FC6695 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		2840D0B82816FF3D00FC6695 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		2840D0BA2817071E00FC6695 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		2840D0BD2817D22A00FC6695 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		2840D0C02817DDA300FC6695 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		28B4A01C28112AEE000FCF4C /* Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B4A01F28112AEE000FCF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B4A02128112AEE000FCF4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +130,43 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2840D0B22816FEFE00FC6695 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2840D0BF2817DD8700FC6695 /* Custom Cells */,
+				2840D0BC2817D21700FC6695 /* Models */,
+				2840D0B72816FF2D00FC6695 /* Repository */,
+				2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */,
+				2840D0B32816FF1400FC6695 /* SearchViewController.swift */,
+				2840D0BA2817071E00FC6695 /* ResultsViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		2840D0B72816FF2D00FC6695 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				2840D0B82816FF3D00FC6695 /* SearchRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		2840D0BC2817D21700FC6695 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2840D0BD2817D22A00FC6695 /* SearchModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2840D0BF2817DD8700FC6695 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2840D0C02817DDA300FC6695 /* SearchTableViewCell.swift */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
 		28B4A01328112AEE000FCF4C = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +225,7 @@
 		28B4A05228112B5F000FCF4C /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				2840D0B22816FEFE00FC6695 /* Search */,
 				28B4A05328112B68000FCF4C /* Landing */,
 			);
 			path = Features;
@@ -380,9 +430,15 @@
 				2840D0B02816B14200FC6695 /* WeatherCondition.swift in Sources */,
 				2840D0A82812DC5200FC6695 /* ForecastModel.swift in Sources */,
 				28B4A06728113623000FCF4C /* ServiceErrors.swift in Sources */,
+				2840D0BB2817071E00FC6695 /* ResultsViewController.swift in Sources */,
 				2840D0AB2816841B00FC6695 /* ForecastTableViewCell.swift in Sources */,
+				2840D0C12817DDA300FC6695 /* SearchTableViewCell.swift in Sources */,
+				2840D0B62816FF1F00FC6695 /* SearchViewModel.swift in Sources */,
+				2840D0BE2817D22A00FC6695 /* SearchModel.swift in Sources */,
+				2840D0B42816FF1400FC6695 /* SearchViewController.swift in Sources */,
 				28B4A0612811324D000FCF4C /* CurrentWeatherModel.swift in Sources */,
 				28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */,
+				2840D0B92816FF3D00FC6695 /* SearchRepository.swift in Sources */,
 				2840D0AD28169DCB00FC6695 /* UIViewControllerExtension.swift in Sources */,
 				28B4A063281133EB000FCF4C /* LandingRepository.swift in Sources */,
 			);
