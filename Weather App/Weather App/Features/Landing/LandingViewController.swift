@@ -16,6 +16,9 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet private var currentTempreture: UILabel!
     @IBOutlet private var weather: UILabel!
     @IBOutlet private weak var forecastTableView: UITableView!
+    @IBOutlet private weak var currentWeatherView: UIView!
+    @IBOutlet private weak var themeSwitch: UISwitch!
+    @IBOutlet private weak var detailedTempretureView: UIView!
     
     private var manager: CLLocationManager = CLLocationManager()
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
@@ -24,11 +27,31 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
+        self.view.backgroundColor = UIColor(named: "SeaBlue")
+        forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
+        detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpManager()
+    }
+    
+    @IBAction func switchDidChange(_ sender: UISwitch) {
+        if sender.isOn {
+            currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_sunny.png")!)
+            self.view.backgroundColor = UIColor(named: "Sunny")
+            forecastTableView.backgroundColor = UIColor(named: "Sunny")
+            detailedTempretureView.backgroundColor = UIColor(named: "Sunny")
+        } else {
+            currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
+            self.view.backgroundColor = UIColor(named: "SeaBlue")
+            forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
+            detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
+        }
+        
+        forecastTableView.reloadData()
     }
     
     func setUpTableView() {
@@ -101,6 +124,12 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
+        if(self.themeSwitch.isOn) {
+            cell.backgroundColor = UIColor(named: "Sunny")
+        } else {
+            cell.backgroundColor = UIColor(named: "SeaBlue")
+        }
+        
         let image = setWeatherIcon(weather: weatherCondition.lowercased())
         
         cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0, viewModel.currentWeekFromToday[indexPath.row], image)
@@ -122,14 +151,10 @@ extension LandingViewController: LandingViewModelDelegate {
         guard let minDegree = data.main?.tempMin else { return }
         guard let maxDegree = data.main?.tempMax else { return }
         guard let weather = data.weather else { return }
-        guard let weatherCondition = data.weather?[0].main else { return }
         
         let roundedDegree = Int(degree.rounded(.toNearestOrEven))
         let roundedMinDegree = Int(minDegree.rounded(.toNearestOrEven))
         let roundedMaxDegree = Int(maxDegree.rounded(.toNearestOrEven))
-        
-        
-        
         
         self.tempreture.text = "\(String(roundedDegree))°C"
         self.weather.text = weather[0].main
