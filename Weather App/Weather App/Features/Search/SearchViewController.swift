@@ -25,7 +25,6 @@ class SearchViewController: UIViewController {
     func setUpTableView() {
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        searchTableView.rowHeight = 50
     }
 }
 
@@ -59,12 +58,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = searchTableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath)
+        guard let cell = searchTableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath) as? SearchTableViewCell else {
+            return UITableViewCell()
+        }
         guard let cityName = viewModel.cityName else {
             return UITableViewCell()
         }
         
-        cell.textLabel?.text = cityName
+        guard let temp = viewModel.searchedCity?.main?.temp else {
+            return UITableViewCell()
+        }
+        
+        cell.updateCellContent(cityName, temp)
         
         return cell
     }
