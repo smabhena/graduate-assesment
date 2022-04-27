@@ -12,3 +12,10 @@ enum APIError: String, Error {
     case serverError
     case parsingError
 }
+
+enum CoreDataError: String, Error {
+    case deleteError
+    case saveError
+    case fetchError
+    case createError
+}
