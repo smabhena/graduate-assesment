@@ -11,16 +11,19 @@ protocol LandingViewModelDelegate: AnyObject {
     func show(error: String)
     func loadContent()
     func reloadView()
+    func disableButton()
 }
 
 class LandingViewModel {
     private var repository: LandingRepositoryType?
+    private var coreDataRepository: FavouriteRepositoryType?
     private var delegate: LandingViewModelDelegate?
     private var weatherReponse: Response?
     private var forecastResponse: Forecast?
     
-    init(repository: LandingRepository, delegate: LandingViewModelDelegate){
+    init(repository: LandingRepository, coreDataRepository: FavouriteRepositoryType, delegate: LandingViewModelDelegate){
         self.repository = repository
+        self.coreDataRepository = coreDataRepository
         self.delegate = delegate
     }
     
@@ -94,6 +97,30 @@ class LandingViewModel {
                 self?.delegate?.reloadView()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
+            }
+        })
+    }
+    
+    func createLocation() {
+        guard let weather = weatherReponse else { return }
+        coreDataRepository?.createLocationItem(location: weather, completion: { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.disableButton()
+            case .failure:
+                self?.delegate?.show(error: "Failed to save movie")
+            }
+        })
+    }
+    
+    func isLocationSaved() {
+        guard let location = weatherReponse else { return }
+        coreDataRepository?.isLocationSaved(location: location, completion: { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.disableButton()
+            case .failure:
+                self?.delegate?.show(error: "Failed to check if location is saved")
             }
         })
     }

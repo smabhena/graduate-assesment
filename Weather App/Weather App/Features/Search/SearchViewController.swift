@@ -11,7 +11,7 @@ class SearchViewController: UIViewController {
     @IBOutlet private weak var searchTableView: UITableView!
     
     private lazy var viewModel = SearchViewModel(repository: SearchRepository(), delegate: self)
-    let searchController = UISearchController(searchResultsController: ResultsViewController())
+    let searchController = UISearchController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
