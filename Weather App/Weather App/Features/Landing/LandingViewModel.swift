@@ -112,4 +112,16 @@ class LandingViewModel {
             }
         })
     }
+    
+    func isLocationSaved() {
+        guard let location = weatherReponse else { return }
+        coreDataRepository?.isLocationSaved(location: location, completion: { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.disableButton()
+            case .failure:
+                self?.delegate?.show(error: "Failed to check if location is saved")
+            }
+        })
+    }
 }

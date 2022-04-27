@@ -9,12 +9,12 @@ import UIKit
 import CoreLocation
 
 class LandingViewController: UIViewController, CLLocationManagerDelegate {
-    @IBOutlet private var city: UILabel!
-    @IBOutlet private var tempreture: UILabel!
-    @IBOutlet private var minTempreture: UILabel!
-    @IBOutlet private var maxTempreture: UILabel!
-    @IBOutlet private var currentTempreture: UILabel!
-    @IBOutlet private var weather: UILabel!
+    @IBOutlet private weak var city: UILabel!
+    @IBOutlet private weak var tempreture: UILabel!
+    @IBOutlet private weak var minTempreture: UILabel!
+    @IBOutlet private weak var maxTempreture: UILabel!
+    @IBOutlet private weak var currentTempreture: UILabel!
+    @IBOutlet private weak var weather: UILabel!
     @IBOutlet private weak var forecastTableView: UITableView!
     @IBOutlet private weak var currentWeatherView: UIView!
     @IBOutlet private weak var themeSwitch: UISwitch!
@@ -38,6 +38,10 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpManager()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.isLocationSaved()
     }
     
     @IBAction func saveButtonTapped() {
@@ -103,6 +107,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         
         viewModel.fetchWeather(latitude, longtitude)
         viewModel.fetchForecast(latitude, longtitude)
+        viewModel.isLocationSaved()
     }
 }
 

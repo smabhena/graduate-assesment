@@ -36,15 +36,15 @@ class FavouriteViewModel {
     
     func allSavedLocations() {
         repository?.fetchSavedLocations(completion: { [weak self] locations in
-                switch locations {
-                case .success(let savedLocations):
-                    self?.locations = savedLocations
-                    DispatchQueue.main.async {
-                        self?.delegate?.reloadView()
-                    }
-                case .failure:
-                    self?.delegate?.show(error: "Failed to fetch locations")
+            switch locations {
+            case .success(let savedLocations):
+                self?.locations = savedLocations
+                DispatchQueue.main.async {
+                    self?.delegate?.reloadView()
                 }
-            })
-        }
+            case .failure:
+                self?.delegate?.show(error: "Failed to fetch locations")
+            }
+        })
+    }
 }

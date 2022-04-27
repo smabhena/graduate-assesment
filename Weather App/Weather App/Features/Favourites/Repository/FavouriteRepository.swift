@@ -9,10 +9,12 @@ import Foundation
 
 typealias CreateLocation = (Result<Void, CoreDataError>) -> Void
 typealias SavedLocationsResult = (Result<[Location], CoreDataError>) -> Void
+typealias isLocationSaved = (Result<Void, CoreDataError>) -> Void
 
 protocol FavouriteRepositoryType {
     func createLocationItem(location: Response?, completion: @escaping (CreateLocation))
     func fetchSavedLocations(completion: @escaping (SavedLocationsResult))
+    func isLocationSaved(location: Response?, completion: @escaping (isLocationSaved))
 }
 
 class FavouriteRepository: FavouriteRepositoryType {
@@ -49,5 +51,19 @@ class FavouriteRepository: FavouriteRepositoryType {
         } catch {
             completion(.failure(.fetchError))
         }
+    }
+    
+    func isLocationSaved(location: Response?, completion: @escaping (isLocationSaved)) {
+        do {
+            guard let locationObject = location else { return }
+            guard let locations = try Constants.context?.fetch(Location.fetchRequest()) else { return }
+            for location in locations where location.location == locationObject.name {
+                completion(.success(()))
+                return
+            }
+        } catch {
+            completion(.failure(.fetchError))
+        }
+        
     }
 }
