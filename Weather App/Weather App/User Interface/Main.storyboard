@@ -267,11 +267,11 @@
             </objects>
             <point key="canvasLocation" x="148" y="524"/>
         </scene>
-        <!--Item-->
+        <!--Favourites-->
         <scene sceneID="5uh-5K-G9N">
             <objects>
                 <navigationController id="FXl-OE-Fid" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="CHO-ns-7v8"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="star" catalog="system" id="CHO-ns-7v8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="LgI-lh-Gre">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -345,17 +345,42 @@
             </objects>
             <point key="canvasLocation" x="147.82608695652175" y="1217.4107142857142"/>
         </scene>
-        <!--View Controller-->
+        <!--Favourite View Controller-->
         <scene sceneID="N8l-bG-KpB">
             <objects>
-                <viewController id="tcp-d4-orm" sceneMemberID="viewController">
+                <viewController id="tcp-d4-orm" customClass="FavouriteViewController" customModule="Weather_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QLc-GY-upX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mL4-Tl-hFb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="WXQ-2v-S2U">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WXQ-2v-S2U" id="YHL-j0-BXm">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Jta-EV-yp7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Jta-EV-yp7" firstAttribute="trailing" secondItem="mL4-Tl-hFb" secondAttribute="trailing" id="2TY-Lg-eMH"/>
+                            <constraint firstItem="mL4-Tl-hFb" firstAttribute="top" secondItem="Jta-EV-yp7" secondAttribute="top" id="3L9-xB-Bj4"/>
+                            <constraint firstItem="mL4-Tl-hFb" firstAttribute="leading" secondItem="QLc-GY-upX" secondAttribute="leading" id="JjA-dh-fwa"/>
+                            <constraint firstItem="Jta-EV-yp7" firstAttribute="bottom" secondItem="mL4-Tl-hFb" secondAttribute="bottom" id="LyD-ty-gXN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fxI-0c-TYJ"/>
+                    <connections>
+                        <outlet property="favouritesTableView" destination="mL4-Tl-hFb" id="73R-6Q-99p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8X2-KP-MVN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -365,6 +390,7 @@
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="AccentColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

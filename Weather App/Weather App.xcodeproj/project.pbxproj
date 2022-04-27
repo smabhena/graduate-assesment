@@ -14,7 +14,6 @@
 		2840D0B42816FF1400FC6695 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B32816FF1400FC6695 /* SearchViewController.swift */; };
 		2840D0B62816FF1F00FC6695 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */; };
 		2840D0B92816FF3D00FC6695 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0B82816FF3D00FC6695 /* SearchRepository.swift */; };
-		2840D0BB2817071E00FC6695 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0BA2817071E00FC6695 /* ResultsViewController.swift */; };
 		2840D0BE2817D22A00FC6695 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0BD2817D22A00FC6695 /* SearchModel.swift */; };
 		2840D0C12817DDA300FC6695 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0C02817DDA300FC6695 /* SearchTableViewCell.swift */; };
 		2840D0C4281830AA00FC6695 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0C3281830AA00FC6695 /* FavouriteViewController.swift */; };
@@ -65,7 +64,6 @@
 		2840D0B32816FF1400FC6695 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		2840D0B82816FF3D00FC6695 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
-		2840D0BA2817071E00FC6695 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		2840D0BD2817D22A00FC6695 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		2840D0C02817DDA300FC6695 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		2840D0C3281830AA00FC6695 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				2840D0B72816FF2D00FC6695 /* Repository */,
 				2840D0B52816FF1F00FC6695 /* SearchViewModel.swift */,
 				2840D0B32816FF1400FC6695 /* SearchViewController.swift */,
-				2840D0BA2817071E00FC6695 /* ResultsViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -492,7 +489,6 @@
 				2840D0B02816B14200FC6695 /* WeatherCondition.swift in Sources */,
 				2840D0A82812DC5200FC6695 /* ForecastModel.swift in Sources */,
 				28B4A06728113623000FCF4C /* ServiceErrors.swift in Sources */,
-				2840D0BB2817071E00FC6695 /* ResultsViewController.swift in Sources */,
 				2840D0AB2816841B00FC6695 /* ForecastTableViewCell.swift in Sources */,
 				2840D0CD28198DF400FC6695 /* Location+CoreDataProperties.swift in Sources */,
 				2840D0C12817DDA300FC6695 /* SearchTableViewCell.swift in Sources */,
