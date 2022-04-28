@@ -21,23 +21,20 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet private weak var detailedTempretureView: UIView!
     @IBOutlet private weak var saveButton: UIButton!
     
+    
+    private var themeColor: String?
+    private var theme: String?
+    private var weatherCondition: String?
     private var manager: CLLocationManager = CLLocationManager()
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
                                                   coreDataRepository: FavouriteRepository(),
                                                   delegate: self)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        themeColor = "SeaBlue"
+        theme = "Sea"
         setUpTableView()
-        currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
-        self.view.backgroundColor = UIColor(named: "SeaBlue")
-        forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
-        detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
-        
-//        if NetworkMonitor.shared.isConnected {
-//            print("Connected")
-//            viewModel.createOfflineLocation()
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,24 +46,71 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         viewModel.isLocationSaved()
     }
     
+    
     @IBAction func saveButtonTapped() {
         viewModel.createLocation()
     }
     
     @IBAction func switchDidChange(_ sender: UISwitch) {
+        guard let condition = viewModel.weatherCondition else { return }
         if sender.isOn {
-            currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_sunny.png")!)
-            self.view.backgroundColor = UIColor(named: "Sunny")
-            forecastTableView.backgroundColor = UIColor(named: "Sunny")
-            detailedTempretureView.backgroundColor = UIColor(named: "Sunny")
+            changeTheme("Forest", condition)
         } else {
-            currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
-            self.view.backgroundColor = UIColor(named: "SeaBlue")
-            forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
-            detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
+            changeTheme("Sea", condition)
         }
         
         forecastTableView.reloadData()
+    }
+    
+    func changeTheme(_ theme: String,_ condition: String) {
+        if theme == "Forest"{
+            if condition == "Clouds" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_cloudy.png")!)
+                self.view.backgroundColor = UIColor(named: "Cloudy")
+                forecastTableView.backgroundColor = UIColor(named: "Cloudy")
+                detailedTempretureView.backgroundColor = UIColor(named: "Cloudy")
+                self.themeColor = condition
+                self.theme = theme
+            } else if condition == "Sunny" || condition == "Clear" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_sunny.png")!)
+                self.view.backgroundColor = UIColor(named: "Sunny")
+                forecastTableView.backgroundColor = UIColor(named: "Sunny")
+                detailedTempretureView.backgroundColor = UIColor(named: "Sunny")
+                self.themeColor = condition
+                self.theme = theme
+            } else if condition == "Rain" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_rainy.png")!)
+                self.view.backgroundColor = UIColor(named: "Rainy")
+                forecastTableView.backgroundColor = UIColor(named: "Rainy")
+                detailedTempretureView.backgroundColor = UIColor(named: "Rainy")
+                self.themeColor = condition
+                self.theme = theme
+            }
+            
+        } else if theme == "Sea" {
+            if condition == "Clouds" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_cloudy.png")!)
+                self.view.backgroundColor = UIColor(named: "Cloudy")
+                forecastTableView.backgroundColor = UIColor(named: "Cloudy")
+                detailedTempretureView.backgroundColor = UIColor(named: "Cloudy")
+                self.themeColor = condition
+                self.theme = theme
+            } else if condition == "Sunny" || condition == "Clear" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
+                self.view.backgroundColor = UIColor(named: "SeaBlue")
+                forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
+                detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
+                self.themeColor = "SeaBlue"
+                self.theme = theme
+            } else if condition == "Rain" {
+                currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_rainy.png")!)
+                self.view.backgroundColor = UIColor(named: "Rainy")
+                forecastTableView.backgroundColor = UIColor(named: "Rainy")
+                detailedTempretureView.backgroundColor = UIColor(named: "Rainy")
+                self.themeColor = condition
+                self.theme = theme
+            }
+        }
     }
     
     func setUpTableView() {
@@ -83,9 +127,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setWeatherIcon(weather: String) -> UIImage {
-        
         var weatherIcon: UIImage!
-        
         let weatherCondition = WeatherCondition.init(rawValue: weather)
         
         switch weatherCondition {
@@ -106,17 +148,13 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
-        
         let latitude = String(location.coordinate.latitude)
         let longtitude = String(location.coordinate.longitude)
         
-        if NetworkMonitor.shared.isConnected {
-            print("Connected")
-            viewModel.fetchWeather(latitude, longtitude)
-            viewModel.fetchForecast(latitude, longtitude)
-            viewModel.isLocationSaved()
-            viewModel.createOfflineLocation()
-        }
+        viewModel.fetchWeather(latitude, longtitude)
+        viewModel.fetchForecast(latitude, longtitude)
+        viewModel.isLocationSaved()
+        viewModel.createOfflineLocation()
     }
 }
 
@@ -129,6 +167,8 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = forecastTableView.dequeueReusableCell(withIdentifier: "tableviewcell", for: indexPath) as? ForecastTableViewCell else {
             return UITableViewCell()
         }
+        
+    
         
         guard let temp = viewModel.forecastList else {
             return UITableViewCell()
@@ -144,11 +184,12 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        if(self.themeSwitch.isOn) {
-            cell.backgroundColor = UIColor(named: "Sunny")
-        } else {
-            cell.backgroundColor = UIColor(named: "SeaBlue")
+        guard let themeColor = self.themeColor else {
+            return UITableViewCell()
         }
+        
+        cell.backgroundColor = UIColor(named: themeColor)
+        
         
         let image = setWeatherIcon(weather: weatherCondition.lowercased())
         
@@ -190,5 +231,12 @@ extension LandingViewController: LandingViewModelDelegate {
     
     func disableButton() {
         self.saveButton.disableButton("Saved")
+    }
+    
+    func updateTheme(){
+        guard let theme = self.theme else { return }
+        guard let condition = viewModel.weatherCondition else { return }
+        
+        self.changeTheme(theme, condition)
     }
 }

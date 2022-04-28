@@ -12,6 +12,7 @@ protocol LandingViewModelDelegate: AnyObject {
     func loadContent()
     func reloadView()
     func disableButton()
+    func updateTheme()
 }
 
 class LandingViewModel {
@@ -33,6 +34,10 @@ class LandingViewModel {
     
     var weather: Response? {
         return self.weatherReponse
+    }
+    
+    var weatherCondition: String? {
+        return self.weatherReponse?.weather?[0].main
     }
     
     var forecast: Forecast? {
@@ -83,6 +88,8 @@ class LandingViewModel {
             case .success(let response):
                 self?.weatherReponse = response
                 self?.delegate?.loadContent()
+                self?.delegate?.reloadView()
+                self?.delegate?.updateTheme()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }
@@ -95,6 +102,7 @@ class LandingViewModel {
             case .success(let response):
                 self?.forecastResponse = response
                 self?.delegate?.reloadView()
+                self?.delegate?.updateTheme()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }
@@ -138,4 +146,5 @@ class LandingViewModel {
             }
         })
     }
+    
 }
