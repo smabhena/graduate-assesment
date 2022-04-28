@@ -217,5 +217,6 @@ extension LandingViewController: LandingViewModelDelegate {
     func updateWeather() {
         viewModel.fetchWeather()
         viewModel.fetchForecast()
+        viewModel.isLocationSaved()
     }
 }
