@@ -164,12 +164,11 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.backgroundColor = UIColor(named: themeColor)
-        
-        
         let image = setWeatherIcon(weather: weatherCondition.lowercased())
         
+        cell.backgroundColor = UIColor(named: themeColor)
         cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0, viewModel.currentWeekFromToday[indexPath.row], image)
+        
         self.updateTheme()
         return cell
     }
@@ -212,7 +211,6 @@ extension LandingViewController: LandingViewModelDelegate {
     func updateTheme(){
         guard let theme = self.theme else { return }
         guard let condition = viewModel.weatherCondition else { return }
-        
         self.changeTheme(theme, condition)
     }
     

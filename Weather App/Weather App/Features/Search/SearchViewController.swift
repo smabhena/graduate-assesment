@@ -32,7 +32,6 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text else { return }
-        print("Clicked")
         viewModel.fetchSearch(searchText)
     }
     
@@ -52,7 +51,7 @@ extension SearchViewController: SearchViewModelDelegate {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let searchedCity = viewModel.searchedCity {
+        if viewModel.searchedCity != nil {
             return 1
         }
         return 0

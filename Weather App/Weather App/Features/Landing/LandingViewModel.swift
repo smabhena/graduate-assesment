@@ -106,9 +106,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
         self.delegate?.updateWeather()
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
     
     func fetchWeather() {
         guard let latitude = latitude else { return }
