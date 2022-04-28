@@ -19,6 +19,7 @@ class LandingViewController: UIViewController {
     @IBOutlet private weak var themeSwitch: UISwitch!
     @IBOutlet private weak var detailedTempretureView: UIView!
     @IBOutlet private weak var saveButton: UIButton!
+    @IBOutlet private weak var offlineHeading: UILabel!
     
     
     private var themeColor: String?
@@ -26,6 +27,7 @@ class LandingViewController: UIViewController {
     private var weatherCondition: String?
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
                                                   coreDataRepository: FavouriteRepository(),
+                                                  offlineRepository: OfflineRepository(),
                                                   delegate: self)
     
     override func viewDidLoad() {
@@ -37,7 +39,13 @@ class LandingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchWeather()
+        
+        if NetworkMonitor.shared.isConnected {
+            viewModel.fetchWeather()
+        } else {
+            viewModel.fetchLastSavedWeather()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,5 +226,19 @@ extension LandingViewController: LandingViewModelDelegate {
         viewModel.fetchWeather()
         viewModel.fetchForecast()
         viewModel.isLocationSaved()
+    }
+    
+    func showOffline(response: [Offline]) {
+        guard let lastSavedWeather = response.last else { return }
+        guard let time = lastSavedWeather.time else { return }
+        guard let tempreture = lastSavedWeather.tempreture else { return }
+        guard let condition = lastSavedWeather.weather else { return }
+        
+        self.city.text = lastSavedWeather.name
+        self.tempreture.text = "\(tempreture)°C"
+        self.weather.text = condition
+        self.offlineHeading.text = "Offline: Last updated at \(time)"
+        self.reloadView()
+        self.changeTheme("Sea", "Sunny")
     }
 }

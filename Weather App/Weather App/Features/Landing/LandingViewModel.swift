@@ -15,24 +15,32 @@ protocol LandingViewModelDelegate: AnyObject {
     func disableButton()
     func updateTheme()
     func updateWeather()
+    func showOffline(response: [Offline])
 }
 
 class LandingViewModel: NSObject, CLLocationManagerDelegate {
     private lazy var manager = CLLocationManager()
     private var repository: LandingRepositoryType?
     private var coreDataRepository: FavouriteRepositoryType?
+    private var offlineRepository: OfflineRepositoryType?
     private var delegate: LandingViewModelDelegate?
     private var weatherReponse: Response?
     private var forecastResponse: Forecast?
     private var location: CLLocation?
     private var latitude: String?
     private var longitude: String?
+    private var offline = false
     
-    init(repository: LandingRepositoryType, coreDataRepository: FavouriteRepositoryType, delegate: LandingViewModelDelegate){
+    init(repository: LandingRepositoryType,
+         coreDataRepository: FavouriteRepositoryType,
+         offlineRepository: OfflineRepositoryType,
+         delegate: LandingViewModelDelegate){
         super.init()
         self.repository = repository
         self.coreDataRepository = coreDataRepository
+        self.offlineRepository = offlineRepository
         self.delegate = delegate
+        offline = NetworkMonitor.shared.isConnected
         setUpManager()
     }
     
@@ -103,7 +111,9 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
         self.location = location
         self.latitude = String(location.coordinate.latitude)
         self.longitude = String(location.coordinate.longitude)
-        self.delegate?.updateWeather()
+        if NetworkMonitor.shared.isConnected {
+            self.delegate?.updateWeather()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
@@ -119,6 +129,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
                 self?.delegate?.loadContent()
                 self?.delegate?.reloadView()
                 self?.delegate?.updateTheme()
+                self?.saveForOfflineState()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }
@@ -165,16 +176,25 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
         })
     }
     
-    func createOfflineLocation() {
-        guard let weather = weatherReponse else { return }
-        repository?.createOfflineLocationItem(location: weather, completion: { [weak self] result in
+    func saveForOfflineState() {
+        offlineRepository?.createOfflineWeather(weather: weatherReponse, completion: { [weak self] result in
             switch result {
-            case .success:
-                self?.delegate?.disableButton()
-            case .failure:
-                self?.delegate?.show(error: "Failed to save offline weather")
+            case .success():
+                print("saved")
+            case .failure(let error):
+                self?.delegate?.show(error: error.rawValue)
             }
         })
     }
     
+    func fetchLastSavedWeather() {
+        offlineRepository?.fetchOfflineWeather(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.delegate?.showOffline(response: response)
+            case .failure(let error):
+                self?.delegate?.show(error: error.rawValue)
+            }
+        })
+    }
 }

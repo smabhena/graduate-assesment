@@ -64,6 +64,5 @@ class FavouriteRepository: FavouriteRepositoryType {
         } catch {
             completion(.failure(.fetchError))
         }
-        
     }
 }
