@@ -37,7 +37,6 @@ class SearchViewModel {
             switch result {
             case .success(let response):
                 self?.searchResponse = response
-//                print(self?.searchResponse)
                 self?.delegate?.reloadView()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
