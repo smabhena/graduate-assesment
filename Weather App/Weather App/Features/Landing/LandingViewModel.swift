@@ -138,7 +138,6 @@ class LandingViewModel {
         repository?.createOfflineLocationItem(location: weather, completion: { [weak self] result in
             switch result {
             case .success:
-                print("success")
                 self?.delegate?.disableButton()
             case .failure:
                 print("failure")

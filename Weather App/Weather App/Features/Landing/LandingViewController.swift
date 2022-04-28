@@ -69,7 +69,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                 self.view.backgroundColor = UIColor(named: "Cloudy")
                 forecastTableView.backgroundColor = UIColor(named: "Cloudy")
                 detailedTempretureView.backgroundColor = UIColor(named: "Cloudy")
-                self.themeColor = condition
+                self.themeColor = "Cloudy"
                 self.theme = theme
             } else if condition == "Sunny" || condition == "Clear" {
                 currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "forest_sunny.png")!)
@@ -83,7 +83,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                 self.view.backgroundColor = UIColor(named: "Rainy")
                 forecastTableView.backgroundColor = UIColor(named: "Rainy")
                 detailedTempretureView.backgroundColor = UIColor(named: "Rainy")
-                self.themeColor = condition
+                self.themeColor = "Rainy"
                 self.theme = theme
             }
             
@@ -93,7 +93,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                 self.view.backgroundColor = UIColor(named: "Cloudy")
                 forecastTableView.backgroundColor = UIColor(named: "Cloudy")
                 detailedTempretureView.backgroundColor = UIColor(named: "Cloudy")
-                self.themeColor = condition
+                self.themeColor = "Cloudy"
                 self.theme = theme
             } else if condition == "Sunny" || condition == "Clear" {
                 currentWeatherView.backgroundColor = UIColor(patternImage: UIImage(named: "sea_sunny.png")!)
@@ -107,7 +107,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
                 self.view.backgroundColor = UIColor(named: "Rainy")
                 forecastTableView.backgroundColor = UIColor(named: "Rainy")
                 detailedTempretureView.backgroundColor = UIColor(named: "Rainy")
-                self.themeColor = condition
+                self.themeColor = "Rainy"
                 self.theme = theme
             }
         }
@@ -155,6 +155,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         viewModel.fetchForecast(latitude, longtitude)
         viewModel.isLocationSaved()
         viewModel.createOfflineLocation()
+        self.updateTheme()
     }
 }
 
@@ -168,20 +169,16 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-    
-        
         guard let temp = viewModel.forecastList else {
             return UITableViewCell()
         }
         
         guard let data = viewModel.weather else {
             return UITableViewCell()
-            
         }
         
         guard let weatherCondition = data.weather?[0].main else {
             return UITableViewCell()
-            
         }
         
         guard let themeColor = self.themeColor else {
@@ -194,7 +191,7 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
         let image = setWeatherIcon(weather: weatherCondition.lowercased())
         
         cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0, viewModel.currentWeekFromToday[indexPath.row], image)
-        
+        self.updateTheme()
         return cell
     }
 }
