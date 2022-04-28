@@ -13,13 +13,17 @@ class LandingTests: XCTestCase {
     private var delegate: MockDelegate!
     private var repository: MockRepository!
     private var coreDataRepository: MockCoreDataRepository!
+    private var offlineRepository: MockOfflineRepository!
 
     override func setUp() {
         super.setUp()
         self.delegate = MockDelegate()
         self.repository = MockRepository()
         self.coreDataRepository = MockCoreDataRepository()
-        self.viewModel = LandingViewModel(repository: repository, coreDataRepository: coreDataRepository,
+        self.offlineRepository = MockOfflineRepository()
+        self.viewModel = LandingViewModel(repository: repository,
+                                          coreDataRepository: coreDataRepository,
+                                          offlineRepository: offlineRepository,
                                      delegate: delegate)
     }
     
@@ -62,7 +66,6 @@ class LandingTests: XCTestCase {
         XCTAssertEqual(viewModel.forecastCount, 0)
     }
     
-    
     class MockDelegate: LandingViewModelDelegate {
         var showErrorCalled = false
         var loadContentCalled = false
@@ -70,6 +73,11 @@ class LandingTests: XCTestCase {
         var disableButtonCalled = false
         var updateThemeCalled = false
         var updateWeatherCalled = false
+        var showOfflineCalled = false
+        
+        func showOffline(response: [Offline]) {
+            showOfflineCalled = true
+        }
         
         func show(error: String) {
             showErrorCalled = true
@@ -94,6 +102,37 @@ class LandingTests: XCTestCase {
         func updateWeather() {
             updateWeatherCalled = true
         }
+    }
+    
+    class MockOfflineRepository: OfflineRepositoryType {
+        var shouldFail = false
+        
+        func mockData() -> [Offline] {
+            let mockOfflineWeather = Offline()
+            var mockOfflines: [Offline] = []
+            
+            mockOfflines.append(mockOfflineWeather)
+            
+            return mockOfflines
+        }
+        
+        func createOfflineWeather(weather: Response?, completion: @escaping (CreateOfflineWeather)) {
+            if shouldFail {
+                completion(.failure(.createError))
+            } else {
+                completion(.success(()))
+            }
+        }
+        
+        func fetchOfflineWeather(completion: @escaping (FetchOfflineWeather)) {
+            if shouldFail {
+                completion(.failure(.fetchError))
+            } else {
+                completion(.success(mockData()))
+            }
+        }
+        
+        
     }
     
     class MockCoreDataRepository: FavouriteRepositoryType {
@@ -223,15 +262,7 @@ class LandingTests: XCTestCase {
             } else {
                 completionHandler(.success(mockForecast))
             }
-        }
-        
-        func createOfflineLocationItem(location: Response?, completion: @escaping (CreateOfflineLocation)) {
-            if shouldFail {
-                completion(.failure(.createError))
-            }
-        }
-        
-        
+        }    
     }
 
 }

@@ -102,6 +102,13 @@
                                                     <action selector="saveButtonTapped" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zDF-gd-UIn"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iao-la-zu2">
+                                                <rect key="frame" x="33" y="30" width="362" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -219,6 +226,7 @@
                         <outlet property="forecastTableView" destination="x3h-Rc-YFj" id="lcC-Ha-Z8v"/>
                         <outlet property="maxTempreture" destination="DoC-v7-bFw" id="Ww7-12-mQc"/>
                         <outlet property="minTempreture" destination="REh-d1-lE7" id="hbf-gY-GVt"/>
+                        <outlet property="offlineHeading" destination="Iao-la-zu2" id="y6K-3w-xCV"/>
                         <outlet property="saveButton" destination="KxF-g2-yih" id="5D9-KE-BIf"/>
                         <outlet property="tempreture" destination="VOB-UC-UJI" id="DlO-Vh-QZ4"/>
                         <outlet property="themeSwitch" destination="Cqr-Ug-Kni" id="qzq-Ol-KDy"/>

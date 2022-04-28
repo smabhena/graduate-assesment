@@ -9,12 +9,10 @@ import Foundation
 
 typealias WeatherResponse = (Result<Response, APIError>) -> Void
 typealias ForecastResponse = (Result<Forecast, APIError>) -> Void
-typealias CreateOfflineLocation = (Result<Void, CoreDataError>) -> Void
 
 protocol LandingRepositoryType: AnyObject {
     func fetchWeatherResults(_ latitude: String,_ longitude: String, completionHandler: @escaping WeatherResponse)
     func fetchForecastResults(_ latitude: String,_ longitude: String, completionHandler: @escaping ForecastResponse)
-    func createOfflineLocationItem(location: Response?, completion: @escaping (CreateOfflineLocation))
 }
 
 class LandingRepository: LandingRepositoryType {
@@ -89,27 +87,5 @@ class LandingRepository: LandingRepositoryType {
                 }
             }
         }.resume()
-    }
-    
-    func createOfflineLocationItem(location: Response?, completion: @escaping (CreateOfflineLocation)) {
-        guard let location = location else {
-            completion(.failure(.createError))
-            return
-        }
-        
-        guard let context = Constants.context else {
-            completion(.failure(.createError))
-            return
-        }
-        
-        let newOfflineLocation = Offline(context: context)
-        newOfflineLocation.name = location.name
-        
-        do {
-            try context.save()
-            completion(.success(()))
-        } catch {
-            completion(.failure(.createError))
-        }
     }
 }
