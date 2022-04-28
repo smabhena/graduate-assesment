@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import CoreLocation
 
-class LandingViewController: UIViewController, CLLocationManagerDelegate {
+class LandingViewController: UIViewController {
     @IBOutlet private weak var city: UILabel!
     @IBOutlet private weak var tempreture: UILabel!
     @IBOutlet private weak var minTempreture: UILabel!
@@ -25,7 +24,6 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     private var themeColor: String?
     private var theme: String?
     private var weatherCondition: String?
-    private var manager: CLLocationManager = CLLocationManager()
     private lazy var viewModel = LandingViewModel(repository: LandingRepository(),
                                                   coreDataRepository: FavouriteRepository(),
                                                   delegate: self)
@@ -39,7 +37,7 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setUpManager()
+        viewModel.fetchWeather()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,13 +117,6 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         forecastTableView.rowHeight = 50
     }
     
-    func setUpManager() {
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-    }
-    
     func setWeatherIcon(weather: String) -> UIImage {
         var weatherIcon: UIImage!
         let weatherCondition = WeatherCondition.init(rawValue: weather)
@@ -144,18 +135,6 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         return weatherIcon
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-        let latitude = String(location.coordinate.latitude)
-        let longtitude = String(location.coordinate.longitude)
-        
-        viewModel.fetchWeather(latitude, longtitude)
-        viewModel.fetchForecast(latitude, longtitude)
-        viewModel.isLocationSaved()
-        viewModel.createOfflineLocation()
-        self.updateTheme()
     }
 }
 
@@ -185,12 +164,11 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.backgroundColor = UIColor(named: themeColor)
-        
-        
         let image = setWeatherIcon(weather: weatherCondition.lowercased())
         
+        cell.backgroundColor = UIColor(named: themeColor)
         cell.updateCellContent(temp[indexPath.row].main?.temp ?? 0.0, viewModel.currentWeekFromToday[indexPath.row], image)
+        
         self.updateTheme()
         return cell
     }
@@ -233,7 +211,11 @@ extension LandingViewController: LandingViewModelDelegate {
     func updateTheme(){
         guard let theme = self.theme else { return }
         guard let condition = viewModel.weatherCondition else { return }
-        
         self.changeTheme(theme, condition)
+    }
+    
+    func updateWeather() {
+        viewModel.fetchWeather()
+        viewModel.fetchForecast()
     }
 }

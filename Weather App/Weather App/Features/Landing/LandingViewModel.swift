@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol LandingViewModelDelegate: AnyObject {
     func show(error: String)
@@ -13,19 +14,26 @@ protocol LandingViewModelDelegate: AnyObject {
     func reloadView()
     func disableButton()
     func updateTheme()
+    func updateWeather()
 }
 
-class LandingViewModel {
+class LandingViewModel: NSObject, CLLocationManagerDelegate {
+    private lazy var manager = CLLocationManager()
     private var repository: LandingRepositoryType?
     private var coreDataRepository: FavouriteRepositoryType?
     private var delegate: LandingViewModelDelegate?
     private var weatherReponse: Response?
     private var forecastResponse: Forecast?
+    private var location: CLLocation?
+    private var latitude: String?
+    private var longitude: String?
     
     init(repository: LandingRepository, coreDataRepository: FavouriteRepositoryType, delegate: LandingViewModelDelegate){
+        super.init()
         self.repository = repository
         self.coreDataRepository = coreDataRepository
         self.delegate = delegate
+        setUpManager()
     }
     
     var city: String? {
@@ -82,7 +90,28 @@ class LandingViewModel {
         return currentWeek
     }
     
-    func fetchWeather(_ latitude: String,_ longitude: String) {
+    func setUpManager() {
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.requestLocation()
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        self.location = location
+        self.latitude = String(location.coordinate.latitude)
+        self.longitude = String(location.coordinate.longitude)
+        self.delegate?.updateWeather()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
+    
+    func fetchWeather() {
+        guard let latitude = latitude else { return }
+        guard let longitude = longitude else { return }
+        
         self.repository?.fetchWeatherResults(latitude, longitude, completionHandler: { [weak self] result in
             switch result {
             case .success(let response):
@@ -96,7 +125,10 @@ class LandingViewModel {
         })
     }
     
-    func fetchForecast(_ latitude: String,_ longitude: String) {
+    func fetchForecast() {
+        guard let latitude = latitude else { return }
+        guard let longitude = longitude else { return }
+        
         self.repository?.fetchForecastResults(latitude, longitude, completionHandler: { [weak self] result in
             switch result {
             case .success(let response):
