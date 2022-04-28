@@ -17,7 +17,7 @@ class SearchViewModel {
     private var delegate: SearchViewModelDelegate?
     private var searchResponse: Search?
     
-    init(repository: SearchRepository,
+    init(repository: SearchRepositoryType,
          delegate: SearchViewModelDelegate){
         self.repository = repository
         self.delegate = delegate
