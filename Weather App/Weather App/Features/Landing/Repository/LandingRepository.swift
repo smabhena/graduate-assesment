@@ -104,7 +104,6 @@ class LandingRepository: LandingRepositoryType {
         
         let newOfflineLocation = Offline(context: context)
         newOfflineLocation.name = location.name
-        print(newOfflineLocation.name!)
         
         do {
             try context.save()
