@@ -3,7 +3,14 @@
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Offline" representedClassName="Offline" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="tempreture" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="String"/>
+        <attribute name="weather" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Location" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Offline" positionX="-27" positionY="27" width="128" height="89"/>
     </elements>
 </model>

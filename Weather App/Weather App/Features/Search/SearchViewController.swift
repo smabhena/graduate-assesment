@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     func setUpTableView() {
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        searchTableView.rowHeight = 150
     }
 }
 
@@ -65,11 +66,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        guard let weather = viewModel.searchedCity?.weather?[0].main else {
+            return UITableViewCell()
+        }
+        
         guard let temp = viewModel.searchedCity?.main?.temp else {
             return UITableViewCell()
         }
         
-        cell.updateCellContent(cityName, temp)
+        cell.updateCellContent(cityName, temp, weather)
         
         return cell
     }
