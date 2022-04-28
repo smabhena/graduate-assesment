@@ -28,7 +28,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
     private var latitude: String?
     private var longitude: String?
     
-    init(repository: LandingRepository, coreDataRepository: FavouriteRepositoryType, delegate: LandingViewModelDelegate){
+    init(repository: LandingRepositoryType, coreDataRepository: FavouriteRepositoryType, delegate: LandingViewModelDelegate){
         super.init()
         self.repository = repository
         self.coreDataRepository = coreDataRepository
@@ -111,7 +111,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
     func fetchWeather() {
         guard let latitude = latitude else { return }
         guard let longitude = longitude else { return }
-        
+
         self.repository?.fetchWeatherResults(latitude, longitude, completionHandler: { [weak self] result in
             switch result {
             case .success(let response):
@@ -172,7 +172,6 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
             case .success:
                 self?.delegate?.disableButton()
             case .failure:
-                print("failure")
                 self?.delegate?.show(error: "Failed to save offline weather")
             }
         })
