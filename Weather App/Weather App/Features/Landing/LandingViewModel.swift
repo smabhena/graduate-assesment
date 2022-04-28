@@ -124,4 +124,18 @@ class LandingViewModel {
             }
         })
     }
+    
+    func createOfflineLocation() {
+        guard let weather = weatherReponse else { return }
+        repository?.createOfflineLocationItem(location: weather, completion: { [weak self] result in
+            switch result {
+            case .success:
+                print("success")
+                self?.delegate?.disableButton()
+            case .failure:
+                print("failure")
+                self?.delegate?.show(error: "Failed to save offline weather")
+            }
+        })
+    }
 }

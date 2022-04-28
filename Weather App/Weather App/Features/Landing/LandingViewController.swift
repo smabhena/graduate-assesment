@@ -33,6 +33,11 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         self.view.backgroundColor = UIColor(named: "SeaBlue")
         forecastTableView.backgroundColor = UIColor(named: "SeaBlue")
         detailedTempretureView.backgroundColor = UIColor(named: "SeaBlue")
+        
+//        if NetworkMonitor.shared.isConnected {
+//            print("Connected")
+//            viewModel.createOfflineLocation()
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,9 +110,13 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate {
         let latitude = String(location.coordinate.latitude)
         let longtitude = String(location.coordinate.longitude)
         
-        viewModel.fetchWeather(latitude, longtitude)
-        viewModel.fetchForecast(latitude, longtitude)
-        viewModel.isLocationSaved()
+        if NetworkMonitor.shared.isConnected {
+            print("Connected")
+            viewModel.fetchWeather(latitude, longtitude)
+            viewModel.fetchForecast(latitude, longtitude)
+            viewModel.isLocationSaved()
+            viewModel.createOfflineLocation()
+        }
     }
 }
 
