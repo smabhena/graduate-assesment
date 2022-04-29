@@ -35,7 +35,7 @@ extension FavouriteViewController: FavouriteViewModelDelegate {
     
     func show(error: String) {
         self.displayAlert(title: "Error",
-                          message: "Failed to fetch saved locations",
+                          message: "Failed to fetch favourite weather locations",
                           buttonTitle: "Try again")
     }
 }

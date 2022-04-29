@@ -180,7 +180,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
         offlineRepository?.createOfflineWeather(weather: weatherReponse, completion: { [weak self] result in
             switch result {
             case .success(_):
-                print("saved")
+                print()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }

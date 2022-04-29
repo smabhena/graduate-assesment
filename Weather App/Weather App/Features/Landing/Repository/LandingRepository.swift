@@ -16,16 +16,11 @@ protocol LandingRepositoryType: AnyObject {
 }
 
 class LandingRepository: LandingRepositoryType {
-    let apikey: String
     var url: String?
-    
-    init() {
-        self.apikey = "ced76cc94a19715f73c16d224dbfc9d1"
-    }
 
     func fetchWeatherResults(_ latitude: String,_ longitude: String, completionHandler: @escaping WeatherResponse) {
         
-        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apikey)&units=metric"
+        let url = "\(Constants.weatherUrl)?lat=\(latitude)&lon=\(longitude)&appid=\(Constants.apiKey)&units=metric"
  
         guard let request = URL(string: url) else { return }
         
@@ -58,7 +53,7 @@ class LandingRepository: LandingRepositoryType {
     
     func fetchForecastResults(_ latitude: String,_ longitude: String, completionHandler: @escaping ForecastResponse) {
         let url =
-            "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(self.apikey)&cnt=5&units=metric"
+        "\(Constants.forecastUrl)?lat=\(latitude)&lon=\(longitude)&appid=\(Constants.apiKey)&cnt=5&units=metric"
         
         guard let request = URL(string: url) else { return }
         
