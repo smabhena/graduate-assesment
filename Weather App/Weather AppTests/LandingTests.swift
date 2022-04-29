@@ -39,7 +39,7 @@ class LandingTests: XCTestCase {
         XCTAssertEqual(weather, "Cloudy")
     }
     
-    func testCorrectWeatherCondition(){
+    func testCorrectWeatherCondition() {
         viewModel.fetchWeather()
         guard let weatherCondition = viewModel.weatherCondition else { return }
         XCTAssertEqual(weatherCondition, "Cloudy")
@@ -131,8 +131,6 @@ class LandingTests: XCTestCase {
                 completion(.success(mockData()))
             }
         }
-        
-        
     }
     
     class MockCoreDataRepository: FavouriteRepositoryType {
@@ -170,8 +168,6 @@ class LandingTests: XCTestCase {
                 completion(.success(()))
             }
         }
-        
-        
     }
     
     class MockRepository: LandingRepositoryType {

@@ -10,7 +10,6 @@ import Foundation
 typealias CreateOfflineWeather = (Result<Void, CoreDataError>) -> Void
 typealias FetchOfflineWeather = (Result<[Offline], CoreDataError>) -> Void
 
-
 protocol OfflineRepositoryType {
     func createOfflineWeather(weather: Response?, completion: @escaping (CreateOfflineWeather))
     func fetchOfflineWeather(completion: @escaping (FetchOfflineWeather))
@@ -48,7 +47,6 @@ class OfflineRepository: OfflineRepositoryType {
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
-        
         
         let newOfflineWeather = Offline(context: context)
         newOfflineWeather.name = name

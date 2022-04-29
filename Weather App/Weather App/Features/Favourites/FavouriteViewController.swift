@@ -28,7 +28,7 @@ class FavouriteViewController: UIViewController {
         self.favouritesTableView.dataSource = self
     }
 }
-extension FavouriteViewController: FavouriteViewModelDelegate{
+extension FavouriteViewController: FavouriteViewModelDelegate {
     func reloadView() {
         self.favouritesTableView.reloadData()
     }
