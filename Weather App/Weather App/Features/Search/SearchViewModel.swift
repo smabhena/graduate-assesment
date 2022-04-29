@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol SearchViewModelDelegate {
+protocol SearchViewModelDelegate: AnyObject {
     func show(error: String)
     func reloadView()
 }
 
 class SearchViewModel {
     private var repository: SearchRepositoryType?
-    private var delegate: SearchViewModelDelegate?
+    private weak var delegate: SearchViewModelDelegate?
     private var searchResponse: Search?
     
     init(repository: SearchRepositoryType,
-         delegate: SearchViewModelDelegate){
+         delegate: SearchViewModelDelegate) {
         self.repository = repository
         self.delegate = delegate
     }
@@ -30,7 +30,6 @@ class SearchViewModel {
     var cityName: String? {
         return self.searchedCity?.name
     }
-    
     
     func fetchSearch(_ cityName: String) {
         self.repository?.fetchSearchResults(cityName, completionHandler: { [weak self] result in

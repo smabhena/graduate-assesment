@@ -23,7 +23,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
     private var repository: LandingRepositoryType?
     private var coreDataRepository: FavouriteRepositoryType?
     private var offlineRepository: OfflineRepositoryType?
-    private var delegate: LandingViewModelDelegate?
+    private weak var delegate: LandingViewModelDelegate?
     private var weatherReponse: Response?
     private var forecastResponse: Forecast?
     private var location: CLLocation?
@@ -34,7 +34,7 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
     init(repository: LandingRepositoryType,
          coreDataRepository: FavouriteRepositoryType,
          offlineRepository: OfflineRepositoryType,
-         delegate: LandingViewModelDelegate){
+         delegate: LandingViewModelDelegate) {
         super.init()
         self.repository = repository
         self.coreDataRepository = coreDataRepository
@@ -84,15 +84,15 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
         
         var currentWeek: [String] = []
         let limit = 5
-        var i = 0
+        var day = 0
         
-        while i < limit {
+        while day < limit {
             currentWeek.append(daysOfWeek[dayIndex])
             dayIndex = dayIndex.advanced(by: 1)
             if dayIndex > 6 {
                 dayIndex = 0
             }
-            i = i + 1
+            day = day + 1
         }
         
         return currentWeek
@@ -179,8 +179,8 @@ class LandingViewModel: NSObject, CLLocationManagerDelegate {
     func saveForOfflineState() {
         offlineRepository?.createOfflineWeather(weather: weatherReponse, completion: { [weak self] result in
             switch result {
-            case .success():
-                print("saved")
+            case .success(_):
+                print()
             case .failure(let error):
                 self?.delegate?.show(error: error.rawValue)
             }

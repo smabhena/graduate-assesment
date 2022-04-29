@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Offline {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Offline> {

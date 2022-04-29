@@ -17,7 +17,7 @@ class FavouriteViewModel {
     private var repository: FavouriteRepositoryType?
     private var locations: [Location]? = []
     
-    init(delegate: FavouriteViewModelDelegate, repository: FavouriteRepositoryType){
+    init(delegate: FavouriteViewModelDelegate, repository: FavouriteRepositoryType) {
         self.delegate = delegate
         self.repository = repository
     }

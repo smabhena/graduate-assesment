@@ -14,16 +14,11 @@ protocol SearchRepositoryType: AnyObject {
 }
 
 class SearchRepository: SearchRepositoryType {
-    let apikey: String
     var url: String?
-    
-    init() {
-        self.apikey = "ced76cc94a19715f73c16d224dbfc9d1"
-    }
-    
+        
     func fetchSearchResults(_ cityName: String, completionHandler: @escaping SearchResponse) {
         let url =
-        "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(apikey)&units=metric"
+        "\(Constants.weatherUrl)?q=\(cityName)&appid=\(Constants.apiKey)&units=metric"
         
         guard let request = URL(string: url) else { return }
         

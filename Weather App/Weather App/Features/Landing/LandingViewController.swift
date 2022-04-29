@@ -21,7 +21,6 @@ class LandingViewController: UIViewController {
     @IBOutlet private weak var saveButton: UIButton!
     @IBOutlet private weak var offlineHeading: UILabel!
     
-    
     private var themeColor: String?
     private var theme: String?
     private var weatherCondition: String?
@@ -52,12 +51,11 @@ class LandingViewController: UIViewController {
         viewModel.isLocationSaved()
     }
     
-    
-    @IBAction func saveButtonTapped() {
+    @IBAction private func saveButtonTapped() {
         viewModel.createLocation()
     }
     
-    @IBAction func switchDidChange(_ sender: UISwitch) {
+    @IBAction private func switchDidChange(_ sender: UISwitch) {
         guard let condition = viewModel.weatherCondition else { return }
         if sender.isOn {
             changeTheme("Forest", condition)
@@ -216,7 +214,7 @@ extension LandingViewController: LandingViewModelDelegate {
         self.saveButton.disableButton("Saved")
     }
     
-    func updateTheme(){
+    func updateTheme() {
         guard let theme = self.theme else { return }
         guard let condition = viewModel.weatherCondition else { return }
         self.changeTheme(theme, condition)

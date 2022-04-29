@@ -29,6 +29,7 @@
 		2840D0EA281ADD8C00FC6695 /* SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0E9281ADD8C00FC6695 /* SearchTests.swift */; };
 		2840D0EC281AE85100FC6695 /* LandingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0EB281AE85100FC6695 /* LandingTests.swift */; };
 		2840D0F0281B239A00FC6695 /* OfflineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2840D0EF281B239A00FC6695 /* OfflineRepository.swift */; };
+		28A3DEF6281BDBCB00F26221 /* FavouritesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3DEF5281BDBCB00F26221 /* FavouritesTests.swift */; };
 		28B4A02028112AEE000FCF4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A01F28112AEE000FCF4C /* AppDelegate.swift */; };
 		28B4A02228112AEE000FCF4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02128112AEE000FCF4C /* SceneDelegate.swift */; };
 		28B4A02A28112AEE000FCF4C /* Weather_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28B4A02828112AEE000FCF4C /* Weather_App.xcdatamodeld */; };
@@ -85,6 +86,7 @@
 		2840D0E9281ADD8C00FC6695 /* SearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTests.swift; sourceTree = "<group>"; };
 		2840D0EB281AE85100FC6695 /* LandingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingTests.swift; sourceTree = "<group>"; };
 		2840D0EF281B239A00FC6695 /* OfflineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineRepository.swift; sourceTree = "<group>"; };
+		28A3DEF5281BDBCB00F26221 /* FavouritesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTests.swift; sourceTree = "<group>"; };
 		28B4A01C28112AEE000FCF4C /* Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B4A01F28112AEE000FCF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B4A02128112AEE000FCF4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				28B4A03928112AF0000FCF4C /* Weather_AppTests.swift */,
 				2840D0E9281ADD8C00FC6695 /* SearchTests.swift */,
 				2840D0EB281AE85100FC6695 /* LandingTests.swift */,
+				28A3DEF5281BDBCB00F26221 /* FavouritesTests.swift */,
 			);
 			path = "Weather AppTests";
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28B4A04928112AF0000FCF4C /* Build configuration list for PBXNativeTarget "Weather App" */;
 			buildPhases = (
+				28A3DEF4281BD32200F26221 /* ShellScript */,
 				28B4A01828112AEE000FCF4C /* Sources */,
 				28B4A01928112AEE000FCF4C /* Frameworks */,
 				28B4A01A28112AEE000FCF4C /* Resources */,
@@ -526,6 +530,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		28A3DEF4281BD32200F26221 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28B4A01828112AEE000FCF4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -569,6 +593,7 @@
 				28B4A03A28112AF0000FCF4C /* Weather_AppTests.swift in Sources */,
 				2840D0EC281AE85100FC6695 /* LandingTests.swift in Sources */,
 				2840D0EA281ADD8C00FC6695 /* SearchTests.swift in Sources */,
+				28A3DEF6281BDBCB00F26221 /* FavouritesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

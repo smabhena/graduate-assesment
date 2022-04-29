@@ -28,14 +28,14 @@ class FavouriteViewController: UIViewController {
         self.favouritesTableView.dataSource = self
     }
 }
-extension FavouriteViewController: FavouriteViewModelDelegate{
+extension FavouriteViewController: FavouriteViewModelDelegate {
     func reloadView() {
         self.favouritesTableView.reloadData()
     }
     
     func show(error: String) {
         self.displayAlert(title: "Error",
-                          message: "Failed to fetch saved locations",
+                          message: "Failed to fetch favourite weather locations",
                           buttonTitle: "Try again")
     }
 }
