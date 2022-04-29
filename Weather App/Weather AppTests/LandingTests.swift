@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import Weather_App
 
 class LandingTests: XCTestCase {
@@ -66,6 +67,37 @@ class LandingTests: XCTestCase {
         XCTAssertEqual(viewModel.forecastCount, 0)
     }
     
+    func testToday() {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E"
+        let today = dateFormatter.string(from: date)
+        XCTAssertEqual(viewModel.today, today)
+    }
+    
+    func testCurrentWeekFromToday() {
+        let arrayOfWeeks = [["Fri","Sat","Sun","Mon","Tue"],
+                            ["Sat","Sun","Mon","Tue","Wed"],
+                            ["Sun","Mon","Tue", "Wed","Thu"],
+                            ["Mon","Tue", "Wed","Thu","Fri"],
+                            ["Tue", "Wed","Thu","Fri", "Sat"],
+                            ["Wed","Thu","Fri", "Sat", "Sun"],
+                            ["Thu","Fri", "Sat","Sun","Mon"]]
+        
+        XCTAssert(arrayOfWeeks.contains(viewModel.currentWeekFromToday))
+    }
+    
+    func testSaveForOfflineState() {
+        offlineRepository.shouldFail = true
+        viewModel.saveForOfflineState()
+        XCTAssert(delegate.showErrorCalled)
+    }
+    
+    func testFetchWeatherFailure() {
+        viewModel.fetchWeather()
+        XCTAssertFalse(delegate.updateThemeCalled)
+    }
+    
     class MockDelegate: LandingViewModelDelegate {
         var showErrorCalled = false
         var loadContentCalled = false
@@ -102,6 +134,21 @@ class LandingTests: XCTestCase {
         func updateWeather() {
             updateWeatherCalled = true
         }
+    }
+    
+    class TestCoreDataStack: NSObject {
+        lazy var persistentContainer: NSPersistentContainer = {
+            let description = NSPersistentStoreDescription()
+            description.url = URL(fileURLWithPath: "/dev/null")
+            let container = NSPersistentContainer(name: "Weather_App")
+            container.persistentStoreDescriptions = [description]
+            container.loadPersistentStores { _, error in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            }
+            return container
+        }()
     }
     
     class MockOfflineRepository: OfflineRepositoryType {
@@ -161,7 +208,7 @@ class LandingTests: XCTestCase {
             }
         }
         
-        func isLocationSaved(location: Response?, completion: @escaping (isLocationSaved)) {
+        func isLocationSaved(location: Response?, completion: @escaping (IsLocationSaved)) {
             if shouldFail {
                 completion(.failure(.createError))
             } else {
